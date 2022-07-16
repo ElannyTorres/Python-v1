@@ -8,7 +8,7 @@ keep_running = True
 cart = []
 amount = []
 item_name = ''
-options = ('Please select one of the following: \n1. Add item \n2. View cart \n3. Remove item \n4. Compute total \n5. Quit')
+options = ('Please select one of the following: \n1. Add item \n2. View cart \n3. Remove item \n4. Compute total \n5. Correct product name \n6. Correct product price \n7. Quit')
 
 print('Welcome to the Shopping Cart Program!')
 print()
@@ -38,7 +38,6 @@ while keep_running:
     option_selected = int(input('Please enter an action: '))
   elif option_selected == 3:
     index_to_update = int(input('Which item would you like to remove? '))
-
     if index_to_update <= len(cart) and index_to_update > 0:
       print('Item removed')
       cart.pop(index_to_update - 1)
@@ -49,11 +48,39 @@ while keep_running:
     print(options)
     option_selected = int(input('Please enter an action: '))
   elif option_selected == 4:
-    print(f'The totxal price of the items in the shopping is ${sum(amount):.2f}')
+    print(f'The total price of the items in the shopping is ${sum(amount):.2f}')
     print()
     print(options)
     option_selected = int(input('Please enter an action: '))
   elif option_selected == 5:
+    print('Correct product name:')
+    index = int(input('What\'s the index of the product name to correct? '))
+    new_name = input('What\'s the correct product name? ')
+    cart[index-1] = new_name
+    if index == 0 or index > len(cart):
+      print('The index is incorrect.')
+    else:
+      print('\nThe contents of the shopping cart are:')
+      for index, item in enumerate(cart, start=1):
+        print(f'{index}. {item.capitalize()} - ${amount[index - 1]:.2f}')
+    print()
+    print(options)
+    option_selected = int(input('Please enter an action: '))
+  elif option_selected == 6:
+    print('Correct product price:')
+    index = int(input('What\'s the index of the product price to correct? '))
+    new_price = int(input('What\'s the correct product price? '))
+    amount[index-1] = new_price
+    if index == 0 or index > len(cart):
+      print('The index is incorrect.')
+    else:
+      print('\nThe contents of the shopping cart are:')
+      for index, item in enumerate(cart, start=1):
+        print(f'{index}. {item.capitalize()} - ${amount[index - 1]:.2f}')
+    print()
+    print(options)
+    option_selected = int(input('Please enter an action: '))
+  elif option_selected == 7:
     keep_running = False
   else:
     print('\nOption not available.',)
